@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect, ConnectedProps } from 'react-redux';
 
-function App() {
+function App({ requesting }: PropsFromRedux) {
+  console.log(requesting);
   return (
     <div className="App">
       <header className="App-header">
@@ -23,4 +25,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state: any) => {
+  return {
+    requesting: state.items.itemsRequesting
+  }
+}
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+export default connector(App);
